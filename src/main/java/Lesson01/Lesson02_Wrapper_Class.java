@@ -8,6 +8,7 @@ public class Lesson02_Wrapper_Class {
 
         Short liseTalebeSayisi=345;
 
+
         //int primitive
         Integer nufus=3453459;
 
