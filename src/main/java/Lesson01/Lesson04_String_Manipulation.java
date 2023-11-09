@@ -95,7 +95,7 @@ public class Lesson04_String_Manipulation {
         String  [] aSplit= str.split("a");
         System.out.println("aSplit = " + Arrays.toString(aSplit));
 
-//        equalsIgnoreCase()
+
 //                replace()
 //                replaceAll() anlat
     }

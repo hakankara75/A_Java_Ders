@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Lesson_03_Non_Primitive_DataType {
+public class Lesson03_Non_Primitive_DataType {
     public static void main(String[] args) {
         //NONPRIMITIVE
         //2-String
