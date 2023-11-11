@@ -45,18 +45,79 @@ public class Operators01 {
         }
 
         //3.OPERATOR
-        int a=45, b=466;
-        if(a==b)
+        int a=500, b=1;
+        if(a==b) //iki variable in birbirine esit olup olmadigini sorgular
             System.out.println("İşlem birbirine eşit sayılardan oluşuyor !!!! ");
         else
-            System.out.println("İşlem birbirine eşit OLMAYAN sayılardan oluşuyor !!!! ");
+            System.out.println("İşlem birbirine eşit OLMAYAN sayılardan oluşuyor !!!! "); //sonuc burasi cunku a!=b
 
 
         //4.OPERATOR
-        if(a!=b)
+        if(a!=b)  //iki variable in birbirine esit olmadinigi dogrular
             System.out.println("eşit değil !!!! ");
         else
             System.out.println("WEŞİT DEĞİL !!!! ");
 
+        //5.OPERATOR kucuk buyuk
+        if(a>b)
+            System.out.println("A B'den buyuk");
+        else if (a<b)
+            System.out.println("A B'den kucuk");
+            else
+            System.out.println("Esit");
+
+        //5.OPERATOR kucuk buyuk esit
+        if(a>=b)
+            System.out.println("A B'den buyuk");
+        else
+            System.out.println("A B'den buyuk degil");
+
+
+        if(a<=b)
+            System.out.println("A B'den kucuk");
+        else
+            System.out.println("A B'den kucuk degil");
+
+
+        /*  3-  Java'da "+" sembolu iki sayi arasinda kullanilirsa "toplama islemi" olur.
+    Java'da "+" sembolu iki String arasinda veya bir String ve bir sayi arasinda kullanilirsa "concatenation islemi" olur.
+    "concatenation islemi" birlestirme yapar.
+    Note: Concatenation islemlerinde Java matematikteki islem onceligi kurallarini kullanir.
+    Islem onceligi kurallari: i)Once uslu sayilar ii)Parantez ici islemler yapilir iii)Carpma ve bolme iv)Toplama ve cikarma
+
+ */
+        String str = "Hayatta her an yeni bir başlangıçtır; bugün, yarının dünüdür, ve her sabah bir umuttur.";
+        String text = "Geleceği parlak olanlar, daima dünün hatalarından ders alırlar.";
+        String birlesmisHali= str + "  " +text;
+        System.out.println("birlesmisHali = " + birlesmisHali);
+
+        //bu ornekte concanitation yaptik, matematikteki toplama degil
+        String tv= "$1000";
+        tv=tv.replace("$", "");
+        String radio= "$300";
+        radio=radio.replace("$", "");
+        String tvRadio= tv + " "+ radio;
+        System.out.println("tvRadio = " + tvRadio);
+
+        //burada matematikteki toplama islemi yaptik
+        int rad= Integer.parseInt(radio);
+        int tvFiyat= Integer.parseInt(tv);
+        int toplam= rad + tvFiyat;
+        System.out.println("toplam = " + toplam);
+
+        int d= 35325;
+        int e= 34;
+        int f= d +e;
+        System.out.println("f = " + f);
+
+        //bu ornekte concanitation yaptik, matematikteki toplama degil
+        String laptop= "$1500";
+        int tablet=575;
+        String toplamFiyat= laptop + tablet;
+        int toplamFiyatlar= Integer.parseInt(laptop + tablet); //NumberFormatException verir cunku $ bir stringdir.
+        System.out.println("toplamFiyat = " + toplamFiyat);
+        System.out.println("toplamFiyatlar = " + toplamFiyatlar);
+
     }
-}
+    }
+
