@@ -39,8 +39,5 @@ public class Selenium_04_Webelements_Locators_Test {
         WebElement partialLinkText=driver.findElement(By.partialLinkText("sign in"));
 
 
-
-
-
     }
 }
