@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import utilities.TestBase;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Selenium_JUnit_10_DropDown_TestBase extends TestBase {
     /*
@@ -38,9 +40,28 @@ public class Selenium_JUnit_10_DropDown_TestBase extends TestBase {
         //kullanici il dropdowndan secim yapar
         WebElement il= driver.findElement(By.id("locCity"));
 
-        //select objesi olustur
+        //select objesi olustur, select objesi icine parametre olarak locate verilir
         Select select= new Select(il);
-        select.selectByIndex(1);
+
+        //indexe gore secim
+        select.selectByIndex(2);
+
+//        String expectedizmir= driver.findElement(By.cssSelector("option[value='35']")).getText();
+//        System.out.println("izmir = " + expectedizmir);
+//        List <WebElement> list= new ArrayList<>();
+//        list = driver.findElements(By.cssSelector("select[id='locCity']"));
+//        String actualizmir= list.get(2).getText();
+//        System.out.println("actualizmir = " + actualizmir);
+
+        wait(2);
+
+        //value ya gore secim
+        select.selectByValue("03");
+        wait(2);
+
+        //visible texte gore secim
+        select.selectByVisibleText("ARDAHAN");
+        wait(2);
 
 
 
