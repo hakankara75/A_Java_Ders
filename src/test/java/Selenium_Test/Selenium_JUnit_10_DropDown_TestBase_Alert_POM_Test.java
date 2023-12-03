@@ -60,7 +60,7 @@ public class Selenium_JUnit_10_DropDown_TestBase_Alert_POM_Test extends TestBase
         //date of birth drop down gorebilmek icin scroll yapar
         WebElement password= driver.findElement(By.id("secondpassword"));
         Actions actions=new Actions(driver);
-        actions.scrollToElement(password)
+        actions.scrollToElement(password);
 
 
         //date of birth den value ya gore secim yapar
