@@ -32,7 +32,7 @@ public class Selenium_JUnit_11_Iframe_ExtentReport__Css_Test extends TestBase {
         driver.switchTo().frame(mainFrame);
 
         //2.yol
-       // driver.switchTo().frame(0);
+        //driver.switchTo().frame(0);
 
         extentTest.info("1. frame'e girildi");
 
@@ -44,6 +44,10 @@ public class Selenium_JUnit_11_Iframe_ExtentReport__Css_Test extends TestBase {
         WebElement left= driver.findElement(By.xpath("//body[normalize-space()='LEFT']"));
         assertTrue(left.isDisplayed());
 
+        extentTest.info("left kelimesinin gorundugu dogrulandi");
+
+
+        extentTest.info("Test pass oldu.");
 
     }
 }
