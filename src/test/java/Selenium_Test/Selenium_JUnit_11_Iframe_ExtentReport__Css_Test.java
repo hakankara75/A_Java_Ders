@@ -50,4 +50,55 @@ public class Selenium_JUnit_11_Iframe_ExtentReport__Css_Test extends TestBase {
         extentTest.info("Test pass oldu.");
 
     }
+
+    @Test
+    public void iframe2() {
+
+        extentTest.info("Test basladi");
+        //kullanici testkru sitesine gider
+
+        driver.get(" https://testkru.com/Interactions/Frames");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        extentTest.info("testkru sitesine gidildi");
+
+        //parent frame yazisinin oldugunu dogrular
+        //1. yol index ile
+        driver.switchTo().frame(1);
+        extentTest.info("parent frame gecis yapildi");
+
+        String expected="Parent frame";
+        String actual = driver.findElement(By.xpath("//h2[text()='Parent frame']")).getText();
+        assertEquals(expected, actual);
+        extentTest.info("parent frame yazisinin oldugu dogrulandi");
+        extentTest.info("Test bitti");
+            }
+
+    @Test
+    public void iframe3() {
+        //2.yol locate ile
+        extentTest.info("Test basladi");
+
+        //kullanici testkru sitesine gider
+
+        driver.get(" https://testkru.com/Interactions/Frames");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        extentTest.info("testkru sitesine gidildi");
+
+        WebElement parentFrame= driver.findElement(By.xpath("//iframe[@id='frame2']"));
+        driver.switchTo().frame(parentFrame);
+        extentTest.info("parent frame gecis yapildi");
+
+        String expected="Parent frame";
+        String actual = driver.findElement(By.xpath("//h2[text()='Parent frame']")).getText();
+        assertEquals(expected, actual);
+        extentTest.info("parent frame yazisinin oldugu dogrulandi");
+
+        //child frame yazisinin gorunur oldugunu dogrular
+        WebElement childFrame= driver.findElement(By.xpath("//iframe[@srcdoc='<h3>Child frame</h3>']"));
+        driver.switchTo().frame(childFrame);
+        WebElement child = driver.findElement(By.xpath("//h3[text()='Child frame']"));
+        assertTrue(child.isDisplayed());
+        extentTest.info("child frame yazisinin gorunur oldugunu dogrulandi");
+        extentTest.info("Test bitti");
+    }
 }
