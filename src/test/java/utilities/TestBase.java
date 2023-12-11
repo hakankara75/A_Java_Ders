@@ -3,12 +3,17 @@ package utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -27,9 +32,9 @@ public class TestBase {
 
 
         //Extent Report icin
-        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
+//        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         //Extent Report icin asagisi
         //----------------------------------------------------------------------------------------
         extentReports = new ExtentReports();
@@ -96,6 +101,18 @@ public class TestBase {
    public static void sendKeysToAlert(String str) {
 
         driver.switchTo().alert().sendKeys(str);
+   }
+
+   public static void webElementScreenShoot(WebElement element){
+       String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
+       String dosyaYolu= "TestOutput/webElementScreenShoot"+tarih+".png";
+
+       try {
+           FileUtils.copyFile(element.getScreenshotAs(OutputType.FILE), new File(dosyaYolu));
+       }catch (IOException e) {
+           throw new RuntimeException(e);
+       }
+
    }
 
 

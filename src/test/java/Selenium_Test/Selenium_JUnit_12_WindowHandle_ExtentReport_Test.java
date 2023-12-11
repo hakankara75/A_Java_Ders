@@ -23,6 +23,7 @@ public class Selenium_JUnit_12_WindowHandle_ExtentReport_Test extends TestBase {
 
         //kullanici sayfa handle alir
         String firstPage= driver.getWindowHandle();
+        System.out.println("firstPage = " + firstPage);
 
         //new tab butonuna basilir
         WebElement newTab= driver.findElement(By.id("tabButton"));
@@ -38,6 +39,7 @@ public class Selenium_JUnit_12_WindowHandle_ExtentReport_Test extends TestBase {
             }
         }
         String secondPage= driver.getWindowHandle(); //2. pencere degeri
+        System.out.println("secondPage = " + secondPage);
 
         WebElement sampleText= driver.findElement(By.id("sampleHeading"));
         assertTrue(sampleText.isDisplayed());
@@ -55,12 +57,13 @@ public class Selenium_JUnit_12_WindowHandle_ExtentReport_Test extends TestBase {
         //yeni pencereye gecip handle degerini alir
         windowHandels= driver.getWindowHandles(); //3 pencerenini handle degeri alindi
         for (String handle : windowHandels){
-            if(!handle.equals(firstPage) || !handle.equals(secondPage)){
+            if(!handle.equals(firstPage) && !handle.equals(secondPage)){
                 driver.switchTo().window(handle); //3. pencereye gecildi
             }
         }
         extentTest.info("3. pencereye gecildi");
         String third= driver.getWindowHandle(); //3. pencere degeri alindi
+        System.out.println("third = " + third);
 
         //This is a sample page texti dogrulandi
         String exp= "This is a sample page";
@@ -81,23 +84,19 @@ public class Selenium_JUnit_12_WindowHandle_ExtentReport_Test extends TestBase {
         //yeni pencerenin handle degerini yazdirir
         windowHandels= driver.getWindowHandles(); //4 pencerenini handle degeri alindi
         for (String handle : windowHandels){
-            if(!handle.equals(firstPage) || !handle.equals(secondPage) || handle.equals(third)){
-                driver.switchTo().window(handle); //3. pencereye gecildi
+            if(!handle.equals(firstPage) && !handle.equals(secondPage) && !handle.equals(third)){
+                driver.switchTo().window(handle); //4. pencereye gecildi
             }
         }
+        String fourth= driver.getWindowHandle();
+        System.out.println("fourth = " + fourth);
+        extentTest.info("4. pencereye gecildi");
 
-
-
-
-
-
-
-
-
-
-
-
-
+        //kullanici ana pencereye gecer ve ana pencerede oldugunu dogrular
+        driver.switchTo().window(firstPage);
+        String theEnd= driver.getWindowHandle();
+        assertEquals(firstPage, theEnd);
+        extentTest.info("kullanici ana pencereye gecer ve ana pencerede oldugunu dogrular");
 
     }
 }
