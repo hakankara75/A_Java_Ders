@@ -53,7 +53,7 @@ public class TestBase {
     public void tearDown() throws InterruptedException {
         extentReports.flush();  //Extent Report'u olusturur ve kapatir
         Thread.sleep(2000);
-        //driver.close();
+        driver.close();
     }
 
     /**
