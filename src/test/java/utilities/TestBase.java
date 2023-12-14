@@ -6,11 +6,10 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class TestBase {
         driver.manage().window().maximize();
 
 
-        //Extent Report icin
+        //Extent Report icin burasi. Yukarida driver atandigi icin asagideki driver atamasini kapattim
 //        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
 //        driver.manage().window().maximize();
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -54,7 +53,7 @@ public class TestBase {
     public void tearDown() throws InterruptedException {
         extentReports.flush();  //Extent Report'u olusturur ve kapatir
         Thread.sleep(2000);
-        driver.close();
+        //driver.close();
     }
 
     /**
@@ -102,7 +101,10 @@ public class TestBase {
 
         driver.switchTo().alert().sendKeys(str);
    }
-
+    /**
+     * WebElement ScreenShot alir
+     * @param element screen shot alinacak elementin locate verilir
+     */
    public static void webElementScreenShoot(WebElement element){
        String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
        String dosyaYolu= "TestOutput/webElementScreenShoot"+tarih+".png";
@@ -114,6 +116,45 @@ public class TestBase {
        }
 
    }
+    /**
+     * tum sayfanin screenshoot ini alir
+     */
+    public static void tumSayfaScreenShoot(){
 
+        String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
+        String dosyaYolu= "TestOutput/screenshoot"+tarih+".png";
+        TakesScreenshot takesScreenshot= (TakesScreenshot) driver;
+
+        try {
+            FileUtils.copyFile(takesScreenshot.getScreenshotAs(OutputType.FILE), new File(dosyaYolu));
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * sayfada mause tekerinin bir donusu kadar asagi iner
+     */
+    public static void pageDown(){
+        Actions actions=new Actions(driver);
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
+    }
+
+    /**
+     * sayfada mause tekerinin bir donusu kadar asagi iner
+     */
+    public static void pageUp(){
+        Actions actions=new Actions(driver);
+        actions.sendKeys(Keys.PAGE_UP).perform();
+    }
+
+    /**
+     * bu metot ile locate verilen element gorunene kadar scroll yapilir
+     * @param element scroll yapilacak elementin locate idir.
+     */
+    public static void scrollToElementByActions(WebElement element){
+        Actions actions=new Actions(driver);
+        actions.scrollToElement(element).perform();
+    }
 
 }

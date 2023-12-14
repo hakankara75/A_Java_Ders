@@ -1,13 +1,16 @@
 package Selenium_Topics;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import utilities.TestBase;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 import static org.junit.Assert.assertTrue;
 
@@ -60,6 +63,7 @@ kullanici sayfa basindaki "Bize Ulaşın" linkini tiklar
         actions.scrollToElement(aramaCubugu).perform();
         wait(2);
 
+
         actions.keyDown(aramaCubugu, Keys.SHIFT) //parmağımı shift butonuna bastim
                 .sendKeys("kedim")  //buyuk harfler ile KEDİM yazisini aramaCubugu na gönderdim
                 .sendKeys(Keys.BACK_SPACE) //M harfini sildim
@@ -83,6 +87,25 @@ kullanici sayfa basindaki "Bize Ulaşın" linkini tiklar
         bizeUlasin.click();
         wait(3);
 
-
     }
+
+    @Test
+    public void pageDownTest() {
+        //        kullanici "https://www.pazarama.com/" sitesine gider
+        driver.get("https://www.pazarama.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
+        Actions actions=new Actions(driver);
+
+//        actions.sendKeys(Keys.PAGE_DOWN).perform();  //mause tekerinin bir donusu kadar sayfayi asagi getirir
+//        wait(2);
+//        actions.sendKeys(Keys.PAGE_UP).perform(); //mause tekerinin bir donusu kadar sayfayi yukari getirir
+//        wait(2);
+        actions.sendKeys(Keys.DOWN).perform(); //mause tekerinin bir centik donusu kadar sayfayi asagi getirir
+        wait(2);
+        actions.sendKeys(Keys.UP).perform(); //mause tekerinin bir centik donusu kadar sayfayi yukari getirir
+        wait(2);
+    }
+
+
 }
