@@ -157,4 +157,14 @@ public class TestBase {
         actions.scrollToElement(element).perform();
     }
 
+    public static void contextClickByJavascript( WebElement element){
+        JavascriptExecutor javascriptExecutor= (JavascriptExecutor) driver;
+        String script= "var element = arguments[0];" +
+                "var evt= new MouseEvent('contextmenu', { bubbles: true, cancelable: true, view:window});"+
+                "element.dispatchEvent(evt);"+
+                "window.open(element.href, '_blanck');";
+
+        javascriptExecutor.executeScript(script, element );
+    }
+
 }

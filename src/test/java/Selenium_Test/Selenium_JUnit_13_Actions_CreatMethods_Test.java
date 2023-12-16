@@ -2,6 +2,7 @@ package Selenium_Test;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -121,6 +122,36 @@ public class Selenium_JUnit_13_Actions_CreatMethods_Test extends TestBase {
     }
 
     @Test
+    public void contextClickByJavascript() {
+
+              /*JAVASCRIPT ILE CONTEXTCLIK
+          kullanici "https://the-internet.herokuapp.com/context_menu" sitesine gider
+          kullanici sayfadaki kutuya sag klik yapar
+         kullanici acilan alerti kapatir
+         */
+//        kullanici "https://the-internet.herokuapp.com/context_menu" sitesine gider
+        driver.get("https://the-internet.herokuapp.com/context_menu");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
+        JavascriptExecutor javascriptExecutor= (JavascriptExecutor) driver;
+        String script= "var element = arguments[0];" +
+                "var evt= new MouseEvent('contextmenu', { bubbles: true, cancelable: true, view:window});"+
+                "element.dispatchEvent(evt);"+
+                "window.open(element.href, '_blanck');";
+
+
+//        kullanici sayfadaki kutuya sag klik yapar
+        WebElement rectangle= driver.findElement(By.id("hot-spot"));
+        javascriptExecutor.executeScript(script, rectangle );
+
+//        kullanici acilan alerti kapatir
+        driver.switchTo().alert().accept();
+
+    }
+
+
+
+    @Test
     public void moveToElement() {
 /*
          kullanici "https://www.etstur.com/" sitesine gider
@@ -138,6 +169,36 @@ public class Selenium_JUnit_13_Actions_CreatMethods_Test extends TestBase {
         actions.moveToElement(otel).perform();
         wait(2);
 
+    }
+
+    @Test
+    public void dragDrop() {
+        /*
+        // kullanici "https://jqueryui.com/droppable/" sitesine gider
+        // kullanici drag nesnesini drop ustune goturur
+ */
+
+        // kullanici "https://jqueryui.com/droppable/" sitesine gider
+        driver.get("https://jqueryui.com/droppable/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        Actions actions=new Actions(driver);
+
+        //iframe gecis yapilir
+//        WebElement iframe=driver.findElement(By.cssSelector("iframe[src='/resources/demos/droppable/default.html']"));
+//        driver.switchTo().frame(iframe);
+
+        driver.switchTo().frame(0);
+
+        // kullanici drag nesnesini drop ustune goturur
+WebElement drag=driver.findElement(By.cssSelector("div[id='draggable']"));
+WebElement drop=driver.findElement(By.cssSelector("div[id='droppable']"));
+
+//dragAndDrop() icine sol tarafa suruklenecek nesne/element, sag ustune suruklenecek nesne/element verilecek
+actions.dragAndDrop(drag,drop).perform();
 
     }
+
+
+
 }
